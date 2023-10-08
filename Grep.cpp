@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 using namespace std;
+string caracteres;
 int main(int argc, char** argv){
    if(argc>3){
     cout<<"Solo puede ingresar dos [2] argumentos";
@@ -11,7 +12,10 @@ int main(int argc, char** argv){
             cout<<"Archivo no encontrado"<<endl;
             return 0;
         }else{
-            cout<<"Archivo encontrado"<<endl;
+            while(in_file.good()){
+                in_file>>caracteres;
+                cout<<caracteres<<endl;
+            }
         }
    }
    return 0;
