@@ -25,16 +25,23 @@ int main(int argc, char** argv){
         }for(int i=0; i<strlen(argv[1]); i++){
             argv[1][i]=tolower(argv[1][i]);
         }for(int i=0; i<caracteres.length(); i++){
-            if(caracteres.find(argv[1])!= string::npos && (caracteres.find(argv[1])<=i && (caracteres.find(argv[1])+strlen(argv[1]))>=i ) && strlen(argv[1])!=1){
+            if(caracteres.find(argv[1])!= string::npos && (caracteres.find(argv[1])<=i && (caracteres.find(argv[1])+strlen(argv[1]))>i ) && strlen(argv[1])!=1){
                 SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color-1);
                 cout<<caracteres_impreso[i];
-            }else if(caracteres.find(argv[1])!= string::npos && (caracteres.find(argv[1])==i && strlen(argv[1])==1)){
+            }else if(caracteres.rfind(argv[1])!= string::npos && (caracteres.rfind(argv[1])<=i && (caracteres.rfind(argv[1])+strlen(argv[1]))>i && strlen(argv[1])!=1)){
+                SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color-1);
+                cout<<caracteres_impreso[i];
+            }else if(caracteres.find(argv[1], i)!= string::npos && caracteres.find(argv[1], i)==i && strlen(argv[1])==1){
                 SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color-1);
                 cout<<caracteres_impreso[i];
             }else{
                 SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),7);
                 cout<<caracteres_impreso[i];
-            }if(caracteres.find(argv[1])+strlen(argv[1])==i && caracteres.find(argv[1])!= string::npos){
+            }if(caracteres.find(argv[1])+strlen(argv[1])==i && caracteres.find(argv[1])!= string::npos && strlen(argv[1])!=1){
+                coincidencia++;
+            }else if(caracteres.find(argv[1],i)==i && caracteres.find(argv[1],i)!= string::npos && strlen(argv[1])==1){
+                coincidencia++;
+            }else if(caracteres.rfind(argv[1])+strlen(argv[1])==i && caracteres.rfind(argv[1])!= string::npos && strlen(argv[1])!=1){
                 coincidencia++;
             }if(i==0){
                 salto_linea++;
